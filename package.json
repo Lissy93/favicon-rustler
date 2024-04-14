@@ -1,0 +1,12 @@
+{
+	"name": "favicon-rustler",
+	"version": "0.1.0",
+	"private": false,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev --env dev"
+	},
+	"devDependencies": {
+		"wrangler": "^3.1.2"
+	}
+}
