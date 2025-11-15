@@ -32,7 +32,7 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
 
     match fetch_and_scale_icon(&icon_url, size).await {
         Ok(data) => {
-            let mut headers = Headers::new();
+            let headers = Headers::new();
             headers.set("Content-Type", "image/png")?;
             Response::from_bytes(data).map(|resp| resp.with_headers(headers))
         },
