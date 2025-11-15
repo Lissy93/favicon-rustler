@@ -3,7 +3,7 @@ main = "build/worker/shim.mjs"
 compatibility_date = "2023-12-01"
 
 [build]
-command = "cargo install -q worker-build && worker-build --release"
+command = "cargo build --target wasm32-unknown-unknown --release && wasm-bindgen --target bundler --out-dir ./build/worker target/wasm32-unknown-unknown/release/favicon_rustler.wasm && mkdir -p build/worker && echo 'import * as imports from \"./favicon_rustler.js\"; export default imports;' > build/worker/shim.mjs"
 
 [env.dev]
-build = { command = "cargo install -q worker-build && worker-build --dev" }
+build = { command = "cargo build --target wasm32-unknown-unknown && wasm-bindgen --target bundler --no-typescript --out-dir ./build/worker target/wasm32-unknown-unknown/debug/favicon_rustler.wasm && cat > build/worker/shim.mjs <<'EOF'\nexport * from './favicon_rustler.js';\nEOF\n" }
